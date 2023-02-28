@@ -1,1 +1,4 @@
 LearningQ/
+
+env/
+*/__pycache__/
