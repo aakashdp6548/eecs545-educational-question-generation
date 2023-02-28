@@ -17,27 +17,22 @@ import numpy as np
 from nltk.tokenize import sent_tokenize
 from sentence_transformers import SentenceTransformer, util
 
-DATA_DIR='LearningQ/data/experiments/khan/'
-
 def load_data(source_filename, target_filename, sample_size=None):
     '''
     Loads the data from the files and extracts random sample (if desired).
     Parameters:
-        source_filename: the source file (from CLI)
-        target_filename: the questions file (from CLI)
+        source_filename: the source file
+        target_filename: the questions file
         sample_size: the number of source/question pairs to randomly select
                        (optional, returns all by default)
     Returns:
         Tuple of sentence and question lists
     '''
     # get context and target files
-    source_file = os.path.join(DATA_DIR, source_filename)
-    questions_file = os.path.join(DATA_DIR, target_filename)
-
-    with open(source_file) as f:
+    with open(source_filename) as f:
         sentence_lines = f.readlines()    
 
-    with open(questions_file) as f:
+    with open(target_filename) as f:
         question_lines = f.readlines()
 
     if len(sentence_lines) != len(question_lines):
@@ -87,7 +82,9 @@ def main(args):
         args: command line parameters
     '''
     # Load data and tokenize sentences
-    sentences, questions = load_data(args.source, args.target, args.sample_size)
+    source_file = os.path.join(args.dir, args.source)
+    target_file = os.path.join(args.dir, args.target)
+    sentences, questions = load_data(source_file, target_file, args.sample_size)
     tokenized_sentences = tokenize_sentences(sentences)
 
     # Compute similarity for each question to its sentences
@@ -113,6 +110,8 @@ if __name__=='__main__':
     parser.add_argument('--write', type=str, required=True, help='file to write new sentences to (full path)')
     parser.add_argument('--sample_size', type=int, required=False, default=None, 
                         help='number of sentences to load (optional; selected randomly from source/question files)')
+    parser.add_argument('--dir', type=str, required=False, default='LearningQ/data/experiments/khan/',
+                        help='directory that the source and target files are in. Default is the labeled khan folder')
     args = parser.parse_args()
 
     main(args)
