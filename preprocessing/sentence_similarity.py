@@ -18,10 +18,6 @@ from nltk.tokenize import sent_tokenize
 from sentence_transformers import SentenceTransformer, util
 
 DATA_DIR='LearningQ/data/experiments/khan/'
-SENTENCE_FILE = 'src-train.txt'
-QUESTIONS_FILE = 'tgt-train.txt'
-
-SAMPLE_SIZE = 10
 
 def load_data(source_filename, target_filename, sample_size=None):
     '''
