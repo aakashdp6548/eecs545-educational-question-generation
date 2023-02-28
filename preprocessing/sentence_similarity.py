@@ -2,7 +2,7 @@
 Script to extract sentences from context passage based on similarity
 to the question. Currently only the most relevant sentence based on
 the similarity metric is chosen, might update later to select 2+
-sentence.
+sentences.
 
 Usage: (from root directory)
     ./preprocesing/sentence_similarity.py <SOURCE_FILE> <QUESTIONS_FILE> <OUTPUT_FILE> [SAMPLE_SIZE]
@@ -44,10 +44,10 @@ def load_data(source_filename, target_filename, sample_size=None):
         raise Exception("Number of lines in source and target files don't match")
 
     # Pull <SAMPLE_SIZE> sentences / questions randomly
-    if SAMPLE_SIZE is not None and SAMPLE_SIZE < len(sentence_lines):
+    if sample_size is not None and sample_size < len(sentence_lines):
         data = list(zip(sentence_lines, question_lines))
         np.random.shuffle(data)
-        sample = data[0:SAMPLE_SIZE]
+        sample = data[0:sample_size]
         sentence_lines, question_lines = zip(*sample)
 
     return sentence_lines, question_lines
