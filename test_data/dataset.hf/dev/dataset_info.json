@@ -1,0 +1,64 @@
+{
+  "builder_name": "json",
+  "citation": "",
+  "config_name": "default",
+  "dataset_size": 83020543,
+  "description": "",
+  "download_checksums": {
+    "/home/aakashdp/school/eecs545/eecs545-educational-question-generation/test_data/passage-to-questions/p2q-train.json": {
+      "num_bytes": 67653910,
+      "checksum": null
+    },
+    "/home/aakashdp/school/eecs545/eecs545-educational-question-generation/test_data/passage-to-questions/p2q-dev.json": {
+      "num_bytes": 8871208,
+      "checksum": null
+    },
+    "/home/aakashdp/school/eecs545/eecs545-educational-question-generation/test_data/passage-to-questions/p2q-test.json": {
+      "num_bytes": 8653841,
+      "checksum": null
+    }
+  },
+  "download_size": 85178959,
+  "features": {
+    "passage": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "questions": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "Sequence"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 168199502,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 65890756,
+      "num_examples": 7478,
+      "dataset_name": "json"
+    },
+    "dev": {
+      "name": "dev",
+      "num_bytes": 8667203,
+      "num_examples": 1146,
+      "dataset_name": "json"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 8462584,
+      "num_examples": 1115,
+      "dataset_name": "json"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
