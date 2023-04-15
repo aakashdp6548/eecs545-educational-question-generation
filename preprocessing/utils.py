@@ -4,9 +4,13 @@ Various preprocessing util functions.
 
 import json
 import os
+import csv
 from datasets import load_dataset, DatasetDict
 
 def map_passage2questions(source_filename, target_filename):
+    '''
+    Maps each unique passage to a list of questions from that passage.
+    '''
     with open(source_filename) as f:
         passage_lines = f.readlines()    
 
@@ -22,6 +26,9 @@ def map_passage2questions(source_filename, target_filename):
     return data
 
 def save_passage2questions(source_filename, target_filename, output_filename):
+    '''
+    Saves dictionary mapping passages to lists of questions as a json file
+    '''
     data_dir = map_passage2questions(source_filename, target_filename)
 
     output = []
@@ -36,6 +43,9 @@ def save_passage2questions(source_filename, target_filename, output_filename):
 
 
 def create_dataset():
+    '''
+    Creates a Huggingface dataset from the passage-to-questions data
+    '''
     data_files = {
         'train': 'test_data/passage-to-questions/p2q-train.json',
         'dev': 'test_data/passage-to-questions/p2q-dev.json',
@@ -57,6 +67,9 @@ def process_teded_data():
 
 
 def create_teded_dataset():
+    '''
+    Creates Huggingface dataset from the passage-to-questions files for TedEd data
+    '''
     para_tgt_file = 'test_data/teded_passage-to-questions/para_tgt_test.json'
     src_tgt_file = 'test_data/teded_passage-to-questions/src_tgt_test.json'
 
@@ -71,6 +84,35 @@ def create_teded_dataset():
         })
         new_dataset.save_to_disk(f'test_data/teded_full_{data_type}.hf')
 
+
+def write_as_text(dataset, output_dir):
+    '''
+    Saves a dataset as a text file in the form
+    <passage>\t<question>\t<question>
+
+    This is the format expected by the G2S code for the SQuAD data. We're just substituting
+    the question again in place of the answer since we don't have answers.
+    '''
+    splits = [
+        ('train', dataset['train']), 
+        ('val', dataset['val']),
+        ('test', dataset['test'])
+    ]
+
+    # create output directory if doesn't exist
+    if not os.path.isdir(output_dir):
+        os.makedirs(output_dir)
+
+    for name, data in splits:
+        output_file = os.path.join(output_dir, f'{name}.txt')
+        with open(output_file, 'w') as f:
+            tsv_writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_NONE)
+            for sample in data:
+                passage = sample['passage'].strip()
+                for question in sample['questions']:
+                    question = question.strip()
+                    tsv_writer.writerow([passage, question, question])
+        print(f'Wrote {output_file}')
 
 if __name__=='__main__':
     create_teded_dataset()
