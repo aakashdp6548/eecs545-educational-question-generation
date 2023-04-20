@@ -1,0 +1,46 @@
+[main] INFO CoreNLP - --- StanfordCoreNLPServer#main() called ---
+[main] INFO CoreNLP - Server default properties:
+			(Note: unspecified annotator properties are English defaults)
+			inputFormat = text
+			outputFormat = json
+			prettyPrint = false
+[main] INFO CoreNLP - Threads: 4
+[main] INFO CoreNLP - Starting server...
+[main] INFO CoreNLP - StanfordCoreNLPServer listening at /0:0:0:0:0:0:0:0:9000
+[pool-1-thread-2] INFO CoreNLP - [/127.0.0.1:53406] API call w/annotators tokenize,pos,depparse
+[pool-1-thread-1] INFO CoreNLP - [/127.0.0.1:53384] API call w/annotators tokenize,pos,depparse
+[pool-1-thread-3] INFO CoreNLP - [/127.0.0.1:53420] API call w/annotators tokenize,pos,depparse
+you 're swimming in the ocean when something brushes your leg . when the tingling sets in , you realize you 've been stung by a jellyfish . how do these beautiful , gelatinous creatures pack such a painful punch ?
+you 're swimming in the ocean when something brushes your leg . when the tingling sets in , you realize you 've been stung by a jellyfish . how do these beautiful , gelatinous creatures pack such a painful punch ?
+[pool-1-thread-4] INFO CoreNLP - [/127.0.0.1:53422] API call w/annotators tokenize,pos,depparse
+the truth is that many people are susceptible not only to the temptation to commit fraud but to convincing themselves that they 've done nothing wrong . so why does fraud happen ? while individual motivations may differ from case to case , the fraud triangle , a model developed by criminologist donald cressey , shows three conditions that make fraud likely : pressure , opportunity , and rationalization .
+most of our cells need oxygen because it 's one of the key ingredients of aerobic respiration . that 's the process that produces a molecule called atp , which our cells use to power their many incredible functions . but getting oxygen throughout our bodies is a surprisingly difficult task .
+[pool-1-thread-3] INFO edu.stanford.nlp.pipeline.StanfordCoreNLP - Adding annotator tokenize
+[pool-1-thread-3] INFO edu.stanford.nlp.pipeline.StanfordCoreNLP - Adding annotator pos
+[pool-1-thread-3] INFO edu.stanford.nlp.tagger.maxent.MaxentTagger - Loading POS tagger from edu/stanford/nlp/models/pos-tagger/english-left3words-distsim.tagger ... done [2.1 sec].
+[pool-1-thread-3] INFO edu.stanford.nlp.pipeline.StanfordCoreNLP - Adding annotator depparse
+[pool-1-thread-3] INFO edu.stanford.nlp.parser.nndep.DependencyParser - Loading depparse model: edu/stanford/nlp/models/parser/nndep/english_UD.gz ... Time elapsed: 2.3 sec
+[pool-1-thread-3] INFO edu.stanford.nlp.parser.nndep.Classifier - PreComputed 20000 vectors, elapsed Time: 3.441 sec
+[pool-1-thread-3] INFO edu.stanford.nlp.parser.nndep.DependencyParser - Initializing dependency parser ... done [5.8 sec].
+[pool-1-thread-1] INFO CoreNLP - [/127.0.0.1:53436] API call w/annotators tokenize,pos,depparse
+this is a kindergarten we designed in 2007 . we made this kindergarten to be a circle .
+[pool-1-thread-4] INFO CoreNLP - [/127.0.0.1:50308] API call w/annotators tokenize,pos,depparse
+ut there 's a twist . virgil only read augustus three selected extracts of the story and that was augustus 's entire exposure to it . some of the other sections could be seen as critical , if not subtly subversive about the emperor 's achievements .
+[pool-1-thread-2] INFO CoreNLP - [/127.0.0.1:50312] API call w/annotators tokenize,pos,depparse
+this type of animation is very difficult to pull off without some planning first . a storyboard is a series of still images that basically serve as a road map for an animation from beginning to end . an animatic is a storyboard in motion .
+[pool-1-thread-1] INFO CoreNLP - [/127.0.0.1:50320] API call w/annotators tokenize,pos,depparse
+but there 's a twist . virgil only read augustus three selected extracts of the story and that was augustus 's entire exposure to it . some of the other sections could be seen as critical , if not subtly subversive about the emperor 's achievements .
+[pool-1-thread-3] INFO CoreNLP - [/127.0.0.1:50332] API call w/annotators tokenize,pos,depparse
+translator : tom carter reviewer : bedirhan cinar optics , or the enhancement of our natural vision , has been one of the biggest catalysts for science over the past 500 years , interestingly , it was n't scientific interest , but more practical matters that led to the initial advancements in optics , starting around 1440 when johannes gutenberg invented his printing press . in short order , books , which had been a rarity , were now becoming a widespread phenomenon .
+[pool-1-thread-2] INFO CoreNLP - [/127.0.0.1:50344] API call w/annotators tokenize,pos,depparse
+since you have two bicycle tires , each one forms an action/reaction pair with the ground . and since the earth is really , really , really big compared to your bicycle , it barely moves from the force caused by your bicycle tires pushing backwards , but you are propelled forward .
+[pool-1-thread-1] INFO CoreNLP - [/127.0.0.1:54872] API call w/annotators tokenize,pos,depparse
+`` hey , another atom . i 'm hydrogen , nice to meet you . how are you feeling about the jump ? ''
+[pool-1-thread-2] INFO CoreNLP - [/127.0.0.1:54882] API call w/annotators tokenize,pos,depparse
+when an ice pack like that starts to move , we call it a glacier and we give it a name . the name of the glacier these caves were formed is the sandy glacier . now , each year as new snow lands on the glacier , it melts in the summer sun , and it forms little rivers of water on the flow along the ice and they start to melt and bore their way down through the glacier , forming big networks of caves , sometimes going all the way down to the underlying bedrock .
+[pool-1-thread-3] INFO CoreNLP - [/127.0.0.1:54884] API call w/annotators tokenize,pos,depparse
+when an ice pack like that starts to move , we call it a glacier and we give it a name . the name of the glacier these caves were formed is the sandy glacier . now , each year as new snow lands on the glacier , it melts in the summer sun , and it forms little rivers of water on the flow along the ice and they start to melt and bore their way down through the glacier , forming big networks of caves , sometimes going all the way down to the underlying bedrock .
+[pool-1-thread-4] INFO CoreNLP - [/127.0.0.1:54898] API call w/annotators tokenize,pos,depparse
+is she turning towards you or away from you ? no one can agree .
+[pool-1-thread-4] INFO CoreNLP - [/127.0.0.1:54914] API call w/annotators tokenize,pos,depparse
+if you add too many particles , well , you know what happens next . laws are everywhere , even in the tiniest particles of gas . if you squeeze them , the pressure will increase as the particles are pushed together .

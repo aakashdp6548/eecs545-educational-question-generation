@@ -1,0 +1,9 @@
+[main] INFO CoreNLP - --- StanfordCoreNLPServer#main() called ---
+[main] INFO CoreNLP - Server default properties:
+			(Note: unspecified annotator properties are English defaults)
+			inputFormat = text
+			outputFormat = json
+			prettyPrint = false
+[main] INFO CoreNLP - Threads: 4
+[main] INFO CoreNLP - Starting server...
+[main] INFO CoreNLP - StanfordCoreNLPServer listening at /0:0:0:0:0:0:0:0:9000
