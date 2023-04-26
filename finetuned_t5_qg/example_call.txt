@@ -1,0 +1,2 @@
+pip install -r piprequirements.txt
+python generate.py --data "../data/teded_full_para.hf" --pipeline-type e2e-qg
