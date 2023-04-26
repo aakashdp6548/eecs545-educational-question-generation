@@ -57,8 +57,8 @@ class ModelHandler:
             model=self.model,
             dataset=DoubleText2TextDataset,
             data_item=DoubleText2TextDataItem,
-            beam_size=self.config["beam_size"],
-            topk=1,
+            beam_size=10,
+            topk=2,
             lower_case=True,
             tokenizer=word_tokenize,
             share_vocab=True,
@@ -88,6 +88,7 @@ def get_args():
     args = vars(parser.parse_args())
 
     return args
+
 
 def load_data(data_file):
     lines = []
@@ -121,8 +122,14 @@ if __name__ == "__main__":
     runner = ModelHandler(g2s_template)
 
     data = load_data(cfg['data'])[0:500:10]
+    data.append(
+        (
+            "So generally speaking, RNN encoder decoder architecture is not very efficient for handling long sequence because it’s hard to remember every detail that’s in the input. So much better mechanism for handling this variable length is to use the notion of attention mechanism.",
+            "handle variable length"
+        )
+    )
 
-    ret = runner.translate(data, batch_size=10)
+    ret = runner.translate(data, batch_size=1)
 
     output_file = None
     if cfg['output'] is not None:

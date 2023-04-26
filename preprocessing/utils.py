@@ -5,6 +5,7 @@ Various preprocessing util functions.
 import json
 import os
 import csv
+import numpy as np
 from datasets import load_dataset, DatasetDict
 from sklearn.model_selection import train_test_split
 
@@ -161,5 +162,45 @@ def remove_no_ans(input_dir, output_dir):
         print(f'Removed {counter} lines from {input_file}')
 
 
+def remove_wotf_questions(input_file, output_file):
+    with open(input_file, 'r') as in_file:
+        lines = []
+        counter = 0
+        for line in in_file:
+            if 'which of the follow' in line:
+                counter += 1
+                continue
+            lines.append(line)
+    with open(output_file, 'w') as out_file:
+        out_file.writelines(lines)
+    
+    print(f'Removed {counter} lines from {input_file}')
+        
+
+def combine_squad_and_teded(squad_dir, teded_dir, output_dir):
+    # create output directory if doesn't exist
+    if not os.path.isdir(output_dir):
+        os.makedirs(output_dir)
+
+    for filename in ['train.txt', 'val.txt']:
+        squad_file = os.path.join(squad_dir, filename)
+        teded_file = os.path.join(teded_dir, filename)
+
+        lines = []
+        with open(squad_file, 'r') as squad, open(teded_file, 'r') as teded:
+            squad_lines = squad.readlines()
+            np.random.shuffle(squad_lines)
+            for line in squad_lines[0:12000]:
+                lines.append(line)
+
+            for line in teded.readlines():
+                lines.append(line)
+
+        np.random.shuffle(lines)
+
+        with open(os.path.join(output_dir, filename), 'w') as f:
+            f.writelines(lines)
+
+
 if __name__=='__main__':
-    write_as_text_w_answer('data/teded_ans')
+    combine_squad_and_teded('g2s_question_generation/data/squad', 'g2s_question_generation/data/teded_gen/raw', 'g2s_question_generation/data/combined/raw')
