@@ -11,7 +11,7 @@ import numpy as np
 import torch
 from nltk.tokenize import word_tokenize
 
-from graph4nlp.pytorch.data.dataset import DoubleText2TextDataItem, DoubleText2TextDataset
+# from graph4nlp.pytorch.data.dataset import DoubleText2TextDataItem, DoubleText2TextDataset
 from graph4nlp.pytorch.data.dataset import Text2TextDataset, Text2TextDataItem
 from graph4nlp.pytorch.inference_wrapper.generator_inference_wrapper import (
     GeneratorInferenceWrapper,
@@ -20,8 +20,8 @@ from graph4nlp.pytorch.modules.config import get_basic_args
 from graph4nlp.pytorch.modules.utils import constants as Constants
 from graph4nlp.pytorch.modules.utils.config_utils import get_yaml_config, update_values
 
-from .main import QGModel  # noqa
-from .fused_embedding_construction import FusedEmbeddingConstruction
+from main import QGModel  # noqa
+
 
 class ModelHandler:
     def __init__(self, config):
@@ -48,17 +48,16 @@ class ModelHandler:
 
     def _build_model(self):
         self.model = torch.load(
-            os.path.join(self.config["out_dir"], Constants._SAVED_WEIGHTS_FILE),
-            map_location=self.device
-        )
+            os.path.join(self.config["out_dir"], Constants._SAVED_WEIGHTS_FILE)
+        ).to(self.device)
 
         self.inference_tool = GeneratorInferenceWrapper(
             cfg=self.config,
             model=self.model,
-            dataset=DoubleText2TextDataset,
-            data_item=DoubleText2TextDataItem,
-            beam_size=10,
-            topk=2,
+            dataset=Text2TextDataset,
+            data_item=Text2TextDataItem,
+            beam_size=self.config["beam_size"],
+            topk=1,
             lower_case=True,
             tokenizer=word_tokenize,
             share_vocab=True,
@@ -83,22 +82,10 @@ def get_args():
     parser.add_argument(
         "-g2s_config", "--g2s_config", required=True, type=str, help="path to the config file"
     )
-    parser.add_argument("--data", required=True, type=str, help='path to test file')
-    parser.add_argument('--output', required=False, type=str, help='path to write results to. If not provided, only printed to console')
+    parser.add_argument("--grid_search", action="store_true", help="flag: grid search")
     args = vars(parser.parse_args())
 
     return args
-
-
-def load_data(data_file):
-    lines = []
-    with open(data_file, 'r') as f:
-        for line in f.readlines():
-            context, answer, _ = line.split('\t')
-            context, answer = context.strip(), answer.strip()
-            lines.append((context, answer))
-
-    return lines
 
 
 if __name__ == "__main__":
@@ -120,24 +107,13 @@ if __name__ == "__main__":
     update_values(to_args=g2s_template, from_args_list=[g2s_args, task_args])
 
     runner = ModelHandler(g2s_template)
-
-    data = load_data(cfg['data'])[0:500:10]
-    data.append(
-        (
-            "So generally speaking, RNN encoder decoder architecture is not very efficient for handling long sequence because it’s hard to remember every detail that’s in the input. So much better mechanism for handling this variable length is to use the notion of attention mechanism.",
-            "handle variable length"
-        )
+    ret = runner.translate(
+        [
+          (
+            "what that means is that heat flows through it very well and also electricity . if you make wires for electrical transmission out of copper , when the electricity goes through them you get very much less heating than say if you made the wires out of iron , and all this heating is of course lost energy . youíd do even better if you made the wires out of silver , but silver is too expensive .",
+            "what would happen if we use iron , instead of copper , to make wires for electricity transmission ?"
+          )
+        ],
+        batch_size=1,
     )
-
-    ret = runner.translate(data, batch_size=1)
-
-    output_file = None
-    if cfg['output'] is not None:
-        output_file = open(cfg['output'], 'w')
-
-    for question, data in zip(ret, data):
-        print(f'Context: {data[0]}')
-        print(f'Generated: {question}')
-        print()
-        if output_file:
-            output_file.write(f'{data[0]}\t{question}\n')
+    print(f"output: {ret}")
