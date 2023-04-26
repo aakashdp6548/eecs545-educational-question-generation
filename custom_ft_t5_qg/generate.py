@@ -188,15 +188,20 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', type=str, required=True, help='path to hf dataset')
     parser.add_argument('--model', type=str, required=True, help='type of model (t5-small, t5-base)')
+    parser.add_argument('--load-model', type='str', default='')
     
     args = vars(parser.parse_args())
     return args
 
 def main(args):
-    # checkpoint = "t5-base"
+    # checkpoint = "t5-base"]
     checkpoint = args['model']
-    model = T5ForConditionalGeneration.from_pretrained(checkpoint)
     tokenizer = T5TokenizerFast.from_pretrained(checkpoint)
+
+    if args['load-model'] == '':
+        model = T5ForConditionalGeneration.from_pretrained(checkpoint)
+    else:
+        model = T5ForConditionalGeneration.from_pretrained(args['load-model'])
     
     all_splits = load_local_data_splits(args['data'])
 
