@@ -1,0 +1,22 @@
+[main] INFO CoreNLP - --- StanfordCoreNLPServer#main() called ---
+[main] INFO CoreNLP - Server default properties:
+			(Note: unspecified annotator properties are English defaults)
+			inputFormat = text
+			outputFormat = json
+			prettyPrint = false
+[main] INFO CoreNLP - Threads: 4
+[main] INFO CoreNLP - Starting server...
+[main] WARN CoreNLP - java.net.BindException: Address already in use
+  sun.nio.ch.Net.bind0(Native Method)
+  sun.nio.ch.Net.bind(Net.java:461)
+  sun.nio.ch.Net.bind(Net.java:453)
+  sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:222)
+  sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:85)
+  sun.net.httpserver.ServerImpl.<init>(ServerImpl.java:141)
+  sun.net.httpserver.HttpServerImpl.<init>(HttpServerImpl.java:50)
+  sun.net.httpserver.DefaultHttpServerProvider.createHttpServer(DefaultHttpServerProvider.java:35)
+  com.sun.net.httpserver.HttpServer.create(HttpServer.java:130)
+  edu.stanford.nlp.pipeline.StanfordCoreNLPServer.run(StanfordCoreNLPServer.java:1540)
+  edu.stanford.nlp.pipeline.StanfordCoreNLPServer.launchServer(StanfordCoreNLPServer.java:1637)
+  edu.stanford.nlp.pipeline.StanfordCoreNLPServer.main(StanfordCoreNLPServer.java:1644)
+[Thread-0] INFO CoreNLP - CoreNLP Server is shutting down.

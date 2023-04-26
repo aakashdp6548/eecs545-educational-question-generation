@@ -25,8 +25,8 @@ from graph4nlp.pytorch.modules.utils.copy_utils import prepare_ext_vocab
 from graph4nlp.pytorch.modules.utils.generic_utils import EarlyStopping, grid, to_cuda, save_model_checkpoint
 from graph4nlp.pytorch.modules.utils.logger import Logger
 
-from .fused_embedding_construction import FusedEmbeddingConstruction
-from .teded_dataset import TedEdDataset
+from fused_embedding_construction import FusedEmbeddingConstruction
+from teded_dataset import TedEdDataset
 
 class QGModel(nn.Module):
     def __init__(self, vocab, config):
@@ -261,7 +261,7 @@ class ModelHandler:
 
                 # pred = torch.max(logits, dim=-1)[1].cpu()
                 dur.append(time.time() - t0)
-                if (i + 1) % 20 == 0:
+                if (i + 1) % 50 == 0:
                     format_str = (
                         "Epoch: [{} / {}] | Step: {} / {} | Time: {:.2f}s | Loss: {:.4f} |"
                         " Val scores:".format(
@@ -425,7 +425,7 @@ def main(config, checkpoint):
     runner = ModelHandler(config, checkpoint)
     t0 = time.time()
 
-    val_score = None #runner.train()
+    val_score = runner.train()
     test_scores = None #runner.test()
 
     # print('Removed best saved model file to save disk space')

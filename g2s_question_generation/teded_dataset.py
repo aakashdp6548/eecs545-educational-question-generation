@@ -1,5 +1,6 @@
 import nltk
 from graph4nlp.pytorch.data.dataset import DoubleText2TextDataset
+from graph4nlp.pytorch.data.dataset import Text2TextDataset
 
 
 class TedEdDataset(DoubleText2TextDataset):
