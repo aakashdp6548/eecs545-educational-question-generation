@@ -1,0 +1,1 @@
+python generate.py --data "../data/teded_full_para.hf" --model t5-base
